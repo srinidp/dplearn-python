@@ -1,3 +1,4 @@
+print("hello world")
 name = input("Enter Name")
 count = int(input("Enter Number"))
 
