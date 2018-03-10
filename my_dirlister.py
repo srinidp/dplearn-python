@@ -1,6 +1,6 @@
 import os
 
-srcpath = "D:\\Users\\srinivasandp\\Downloads\\srinivasan\\learn"
+srcpath = "C:\\"
 cwdpath = os.getcwd()
 
 sizemax = 1024*1024
@@ -15,8 +15,11 @@ wfile = open(wpath, 'a')
 
 for cfolder,sfolders,filenames in os.walk(srcpath):
     foldersize = 0
-    for files in os.listdir(cfolder):
-        foldersize = foldersize + os.path.getsize(os.path.join(cfolder,files))
+    try:
+        for files in os.listdir(cfolder):
+            foldersize = foldersize + os.path.getsize(os.path.join(cfolder,files))
+    except:
+            cfolder = cfolder + "error"
 
     if foldersize/sizemax < 1:
         foldersize = 0
