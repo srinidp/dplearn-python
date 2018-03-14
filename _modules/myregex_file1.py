@@ -1,11 +1,11 @@
 #-------------------------------------------------------------------------------
-# Name:        regex module
+# Name:        regex module1
 # Purpose:
 #
 # Author:      srini_000
 #
 #   r'xxx'  => r ignores the default esc seq
-#   \d      => digits
+#   \d      => numbers
 #   ()      => create groups within pattern
 #   \       => create esc seq in pattern
 #   |       => match any of the mutiple patterns
@@ -15,7 +15,7 @@
 #   {x,y}   => match min x and max y occurence patterns...greedy match(goes for max)
 #   {x,y}?  => match min x and max y occurence patterns...non-greedy match(goes for min)
 #   {0,y}   => match max y occurence patterns... no min
-#   {x,0}   => match min y occurence patterns... no max
+#   {x,0}   => match min x occurence patterns... no max
 #
 # Created:     14/03/2018
 # Copyright:   (c) srini_000 2018
