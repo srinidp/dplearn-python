@@ -4,17 +4,45 @@
 #
 # Author:      srini_000
 #
-#   \d      => numbers
-#   \D      => all except numbers
-#   \w      => numbers + letters + _
-#   \W      => all exccept numbers + letters + _
-#   \s      => tab + space + newline
-#   \S      => all except tab + space + newline
-#   .       => all except newline
-#   ^       => begins with
-#   $       => ends with
-#   [^x]    => negates character sequence of x
-
+# quantifier: ?*+.{}
+# ?     - 0 or 1 character
+# *     - 0 or many characters
+# +     - 1 or many characters
+# .     - any character except newline (\n)
+# {x}   - exact number of x occurrences
+# {x,y} - range of occurrences with x as min and y as max
+#
+# character set: []
+# [] - one or more character(s) or literals
+#    - either or logic (no need of | symbol)
+#    - no escape sequence (no need of \ symbol)
+# [^]- negates []
+# () - group one or more character(s) or literals
+# |  - either or logic
+#
+# anchors: ^$\b\B
+# ^  - starts with character(s) at the beginning of line
+# $  - ends with character(s) at the end of line
+# \b - word boundary
+# \B - not a word boundary
+#
+# patterns: \d\D\w\W\s\S
+# \d - digit character (0-9)
+# \D - not a digit character
+# \w - word character (a-z, A-Z, 0-9, _)
+# \W - not a word character
+# \s - whitespace character (space, tab, newline)
+# \S - not a whitespace character
+# \  - escape sequence character
+#
+# meta characters to be escaped:
+# ?*+.^$|{}()\
+#
+# methods:
+#   'findall'   - returns all matches in list/tuple
+#   'finditer'  - returns all match objects
+#   'search'    - returns first match object
+#
 # Created:     14/03/2018
 # Copyright:   (c) srini_000 2018
 # Licence:     <your licence>
@@ -149,3 +177,18 @@ def regexmain():
 
 
 regexmain()
+
+# re object methods
+## 'findall',
+## 'finditer',
+## 'flags',
+## 'fullmatch',
+## 'groupindex',
+## 'groups',
+## 'match',
+## 'pattern',
+## 'scanner',
+## 'search',
+## 'split',
+## 'sub',
+## 'subn'
