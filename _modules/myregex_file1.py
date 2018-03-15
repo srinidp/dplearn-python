@@ -4,18 +4,44 @@
 #
 # Author:      srini_000
 #
-#   r'xxx'  => r ignores the default esc seq
-#   \d      => numbers
-#   ()      => create groups within pattern
-#   \       => create esc seq in pattern
-#   |       => match any of the mutiple patterns
-#   ?       => match 0 or 1 occurence patterns
-#   *       => match 0 or many occurence patterns
-#   +       => match 1 or many occurence patterns
-#   {x,y}   => match min x and max y occurence patterns...greedy match(goes for max)
-#   {x,y}?  => match min x and max y occurence patterns...non-greedy match(goes for min)
-#   {0,y}   => match max y occurence patterns... no min
-#   {x,0}   => match min x occurence patterns... no max
+# quantifier: ?*+.{}
+# ?     - 0 or 1 character
+# *     - 0 or many characters
+# +     - 1 or many characters
+# .     - any character except newline (\n)
+# {x}   - exact number of x occurrences
+# {x,y} - range of occurrences with x as min and y as max
+#
+# character set: []
+# [] - one or more character(s) or literals
+#    - either or logic (no need of | symbol)
+#    - no escape sequence (no need of \ symbol)
+# [^]- negates []
+# () - group one or more character(s) or literals
+# |  - either or logic
+#
+# anchors: ^$\b\B
+# ^  - starts with character(s) at the beginning of line
+# $  - ends with character(s) at the end of line
+# \b - word boundary
+# \B - not a word boundary
+#
+# patterns: \d\D\w\W\s\S
+# \d - digit character (0-9)
+# \D - not a digit character
+# \w - word character (a-z, A-Z, 0-9, _)
+# \W - not a word character
+# \s - whitespace character (space, tab, newline)
+# \S - not a whitespace character
+# \  - escape sequence character
+#
+# meta characters to be escaped:
+# ?*+.^$|{}()\
+#
+# methods:
+#   'findall'   - returns all matches in list/tuple
+#   'finditer'  - returns all match objects
+#   'search'    - returns first match object
 #
 # Created:     14/03/2018
 # Copyright:   (c) srini_000 2018
@@ -24,51 +50,71 @@
 import re
 import os
 
-def mysub1():
-    print("sub1")
+def mysubfinditer():
+    print("***finditer-all match objects***")
+    print("input:", inputdata)
+
     myregex1 = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+    matchobj = myregex1.finditer(str(inputdata))
 
-    for lines in range (len(inputdata)):
-        #print(inputdata[lines])
-        ## search & group finds first occurance for each input
-        match = myregex1.search(str(inputdata[lines]))
-        if match != None:
-            print("match first", match.group())
+    for items in matchobj:
+        print(items)
+        print(items.group())
 
-        ## searchall finds all occurances for each input
-        matchall = myregex1.findall(str(inputdata[lines]))
-        for items in range(len(matchall)):
-            print("match all", matchall[items])
+def mysubsearch():
+    print("***search-first match object***")
+    print("input:", inputdata)
 
-def mysub2():
-    print("sub2")
+    myregex1 = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+    matchobj = myregex1.search(str(inputdata))
+
+    print(matchobj)
+    print(matchobj.group())
+
+def mysubfindall():
+    print("***findall-all matches as list/tuple***")
+    print("input:", inputdata)
+
+    myregex1 = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+    matchlist = myregex1.findall(str(inputdata))
+
+    for items in range(len(matchlist)):
+        print(matchlist[items])
+
+def mysubgroup():
+    print("input:", inputdata)
     myregex1 = re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')
 
-    for lines in range (len(inputdata)):
-        print("input:", inputdata[lines])
+    print("***finditer-group***")
+    matchobj = myregex1.finditer(str(inputdata))
 
-        ## finds sub-groups using search
-        match = myregex1.search(str(inputdata[lines]))
+    for items in matchobj:
+        print("area code:", items.group(1))
+        print("phone  no:", items.group(2))
 
-        ## finds sub-groups using search
-        matchall = myregex1.findall(str(inputdata[lines]))
+    print("***search-group***")
+    matchobj = myregex1.search(str(inputdata))
 
-        if match != None:
-            print("s.group", match.group())
-            print("area code", match.group(1))
-            print("phone", match.group(2))
+    print("area code:", matchobj.group(1))
+    print("phone  no:", matchobj.group(2))
 
-        if matchall != None and len(matchall) != 0:
-            print("all:", matchall)
+    print("***findall-group***")
+    matchlist = myregex1.findall(str(inputdata))
 
-def mysub3():
-    print("sub3")
+    for items in range(len(matchlist)):
+        print(matchlist[items])
+        print("area code:", matchlist[items][0])
+        print("phone  no:", matchlist[items][1])
+
+def mysubregex():
+    print("***mysubregex***")
     myregexqu = re.compile(r'0(123)?4')
     myregexas = re.compile(r'0(123)*4')
     myregexpl = re.compile(r'0(123)+4')
     myregexco = re.compile(r'123{1,2}')
 
     for lines in range (len(inputdata)):
+        print()
         print("input",inputdata[lines])
         ## finds various pattern matching seq
         match = None
@@ -109,14 +155,20 @@ def regexmain():
     inputfile = open(inputfileloc,'r')
 
     global inputdata
-    inputdata = inputfile.readlines()
+    inputdata = inputfile.readlines(1)
 
-    mysub1()
+    mysubfinditer()
+    mysubsearch()
+    mysubfindall()
     print()
-    mysub2()
+    mysubgroup()
     print()
-    mysub3()
+    inputdata.clear()
+
+    inputdata = inputfile.readlines()
+    mysubregex()
     print()
+    inputdata.clear()
 
     inputfile.close()
 
