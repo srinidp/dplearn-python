@@ -11,6 +11,8 @@
 #
 # emptytup = ()  or emptytup = tuple()
 #
+# sorted(tup);sorted(tup,reverse=True)  => returns a newly sorted tuple
+#
 # Created:     16/03/2018
 # Copyright:   (c) srini_000 2018
 # Licence:     <your licence>
