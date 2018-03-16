@@ -177,17 +177,65 @@ def regexmain():
 
 regexmain()
 
-# re object methods
-## 'findall',
-## 'finditer',
-## 'flags',
-## 'fullmatch',
-## 'groupindex',
-## 'groups',
-## 'match',
-## 'pattern',
-## 'scanner',
-## 'search',
-## 'split',
-## 'sub',
-## 'subn'
+##class SRE_Pattern(builtins.object)
+## |  Compiled regular expression objects
+## |
+## |  Methods defined here:
+## |
+## |  __copy__(...)
+## |
+## |  __deepcopy__(...)
+## |
+## |  __repr__(self, /)
+## |      Return repr(self).
+## |
+## |  findall(...)
+## |      findall(string[, pos[, endpos]]) -> list.
+## |      Return a list of all non-overlapping matches of pattern in string.
+## |
+## |  finditer(...)
+## |      finditer(string[, pos[, endpos]]) -> iterator.
+## |      Return an iterator over all non-overlapping matches for the
+## |      RE pattern in string. For each match, the iterator returns a
+## |      match object.
+## |
+## |  fullmatch(...)
+## |      fullmatch(string[, pos[, endpos]]) -> match object or None.
+## |      Matches against all of the string
+## |
+## |  match(...)
+## |      match(string[, pos[, endpos]]) -> match object or None.
+## |      Matches zero or more characters at the beginning of the string
+## |
+## |  scanner(...)
+## |
+## |  search(...)
+## |      search(string[, pos[, endpos]]) -> match object or None.
+## |      Scan through string looking for a match, and return a corresponding
+## |      match object instance. Return None if no position in the string matches.
+## |
+## |  split(...)
+## |      split(string[, maxsplit = 0])  -> list.
+## |      Split string by the occurrences of pattern.
+## |
+## |  sub(...)
+## |      sub(repl, string[, count = 0]) -> newstring.
+## |      Return the string obtained by replacing the leftmost non-overlapping
+## |      occurrences of pattern in string by the replacement repl.
+## |
+## |  subn(...)
+## |      subn(repl, string[, count = 0]) -> (newstring, number of subs)
+## |      Return the tuple (new_string, number_of_subs_made) found by replacing
+## |      the leftmost non-overlapping occurrences of pattern with the
+## |      replacement repl.
+## |
+## |  ----------------------------------------------------------------------
+## |  Data descriptors defined here:
+## |
+## |  flags
+## |
+## |  groupindex
+## |
+## |  groups
+## |
+## |  pattern
