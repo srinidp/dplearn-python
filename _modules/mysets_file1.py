@@ -8,7 +8,7 @@
 # set1, set2 are variables of set datatype...{}
 #   => set is same as a list except it can hold only unique values
 #   => the order of data in a set can vary during each access or read
-#   => <unordered and no duplicates>
+#   => <un-ordered and no-duplicates>
 #
 # emptyset = set()
 #
@@ -16,6 +16,8 @@
 # set1.union(set2)
 # set1.intersection(set2)
 # set1.difference(set2)
+#
+# set comprehension => use {}
 #
 # Created:     16/03/2018
 # Copyright:   (c) srini_000 2018
@@ -53,6 +55,14 @@ def mysetfun():
     print("intersection:", myset1.intersection(myset2))
     print("difference:", myset1.difference(myset2))
 
+def mysetcomprehension():
+    print("***mysetcomprehension***")
+
+    nums = [1, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10]
+
+    # i want n for each n in nums but with no dups
+    myset = {n for n in nums}
+    print("my set:", myset)
 
 def setsmain():
 
@@ -64,6 +74,9 @@ def setsmain():
     print()
 
     mysetfun()
+    print()
+
+    mysetcomprehension()
     print()
 
     print("sets end")
