@@ -14,7 +14,8 @@
 # '''x''''
 # len(str)
 # str[index]
-# str[i:j];str[i:];str[:j]
+# str[i:j];str[i:];str[:j]  => j is excluded
+# str[start:end:step]   => end is excluded
 # str1 + str2
 #
 # methods:  <'x' can be used inplace of str>
@@ -50,6 +51,17 @@ def mylist2string():
     print(mylst)
     print(mystr)
 
+def mystringslice():
+    print("***mystringslice***")
+    myurl = "http://www.website.com"
+    #index   0123456789...........21
+    #-index-22....................-1
+    print("normal :",myurl)
+    print("reverse:",myurl[::-1])
+    print("domain :",myurl[-4::])
+    print("url    :",myurl[7::])
+    print("name   :",myurl[7:-4:])
+
 def stringsmain():
 
     print("strings")
@@ -57,6 +69,8 @@ def stringsmain():
     myformattedstring()
     print()
     mylist2string()
+    print()
+    mystringslice()
     print()
 
     print("strings end")
