@@ -1,35 +1,71 @@
 import os
+import csv
 
-srcpath = "C:\\"
+srcpath = r'D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox'
+size_mb = 1024*1024
+
+print("start dir lister")
+
+if (os.path.isdir(srcpath)):
+    print('path exists')
+else:
+    print('path does not exists')
+    exit
+
+fsize = {}
+for cfolder,sfolders,filenames in os.walk(srcpath):
+    fsize.setdefault(cfolder,0)
+    #print(cfolder)
+
+for cfolder,sfolders,filenames in os.walk(srcpath):
+    foldersize = 0
+
+    for files in os.listdir(cfolder):
+        foldersize = foldersize + os.path.getsize(os.path.join(cfolder,files))
+
+    foldersize = foldersize/size_mb
+
+    print()
+    #print("cf:{}".format(cfolder))
+    for keys in fsize:
+        if keys in cfolder:
+            #print("=> key:{}".format(keys))
+            fsize[keys] += foldersize
+
 cwdpath = os.getcwd()
-
-sizemax = 1024*1024
-print(sizemax)
 
 wpath = os.path.join(cwdpath,"dirlist.txt")
 wfile = open(wpath, 'w')
 wfile.write('Dir List\n')
 wfile.close()
 
+csvpath = os.path.join(cwdpath,"dirlist.csv")
+csvfile = open(csvpath,'w',newline='')
+csvwriter = csv.writer(csvfile)
+header = ['path','size']
+csvwriter.writerow(header)
+
 wfile = open(wpath, 'a')
 
 for cfolder,sfolders,filenames in os.walk(srcpath):
-    foldersize = 0
-    try:
-        for files in os.listdir(cfolder):
-            foldersize = foldersize + os.path.getsize(os.path.join(cfolder,files))
-    except:
-            cfolder = cfolder + "error"
+    text = cfolder.replace(srcpath,'')
+    text = text.replace('\\',',')
+    #print(text)
+    #print("{},{:.2f}{}".format(cfolder,fsize[cfolder],text))
 
-    if foldersize/sizemax < 1:
-        foldersize = 0
-    else:
-        foldersize = foldersize/sizemax
-
-    #print(cfolder, "," ,foldersize)
-    data = cfolder + "," + str(foldersize) + "\n"
+    ##text file write
+    data = "{},{:.2f}{}\n".format(cfolder,fsize[cfolder],text)
+    #print(data)
     wfile.write(data)
 
-wfile.close()
+    ##csv file write
+    data = "{},{:.2f}{}".format(cfolder,fsize[cfolder],text)
+    #print(data)
+    csvdata = data.split(',')
+    #print(csvdata)
+    csvwriter.writerow(csvdata)
 
-print("")
+wfile.close()
+csvfile.close()
+
+print("end dir lister")

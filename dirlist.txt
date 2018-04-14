@@ -1,0 +1,12 @@
+Dir List
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox,33.08
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn,31.15,Learn
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn\Aero,0.83,Learn,Aero
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn\Embedded,2.02,Learn,Embedded
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn\programming,20.56,Learn,programming
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn\programming\excel,7.03,Learn,programming,excel
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn\programming\excel\excel-vba,0.56,Learn,programming,excel,excel-vba
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn\programming\python,7.75,Learn,programming,python
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\Learn\tms320f28335,0.33,Learn,tms320f28335
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\srini,0.09,srini
+D:\Users\srinivasandp\Downloads\srinivasan\dropit\Dropbox\vanigam,1.84,vanigam
