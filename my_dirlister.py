@@ -3,10 +3,28 @@ import csv
 
 ##global
 fsize = {}
+size_mb = 1024*1024
+
+##lib
+def pathcheck(path, ptype):
+    status = False
+    if(ptype == 'f'):
+        if(os.path.isfile(path)):
+           #print('file exists')
+           status = True
+        else:
+            #print('no file exists => {}'.format(path))
+            pass
+    else:
+        if (os.path.isdir(path)):
+            #print('path exists')
+            status = True
+        else:
+            print('no path exists => {}'.format(path))
+    return status
 
 ##process
 def dirlister_p(srcpath):
-    size_mb = 1024*1024
 
     for cfolder,sfolders,filenames in os.walk(srcpath):
         fsize.setdefault(cfolder,0)
@@ -42,30 +60,26 @@ def dirlister_o(srcpath, txtpath, csvpath):
         txtfile.write(data)
 
         ##csv file write
-        data = "{},{:.2f}{}".format(cfolder,fsize[cfolder],text)
+        data = "{},dir,{:.2f}{}".format(cfolder,fsize[cfolder],text)
         #print(data)
         csvdata = data.split(',')
         #print(csvdata)
         csvwriter.writerow(csvdata)
 
+        for file in os.listdir(cfolder):
+            if(pathcheck(os.path.join(cfolder,file),'f') == True):
+                size = os.path.getsize(os.path.join(cfolder,file))/size_mb
+                data = "{},{:.2f}\n".format(file,size)
+                txtfile.write(data)
+                data = "{},file,{:.2f}".format(file,size)
+                #print(data)
+                csvdata = data.split(',')
+                #print(csvdata)
+                csvwriter.writerow(csvdata)
+
     txtfile.close()
     csvfile.close()
 
-def pathcheck(path, ptype):
-    status = False
-    if(ptype == 'f'):
-        if(os.path.isfile(path)):
-           print('file exists')
-           status = True
-        else:
-            print('no file exists => {}'.format(path))
-    else:
-        if (os.path.isdir(path)):
-            print('path exists')
-            status = True
-        else:
-            print('no path exists => {}'.format(path))
-    return status
 
 ##input
 def dirlister_i():
@@ -88,9 +102,9 @@ def dirlister_i():
             line['output file'] = 'o_dirlister'
         dst_text = dst + '\\' + line['output file'] + '.txt'
         dst_csv = dst + '\\' + line['output file'] + '.csv'
-        print(src)
-        print(dst_text)
-        print(dst_csv)
+        #print(src)
+        #print(dst_text)
+        #print(dst_csv)
 
         ##process
         dirlister_p(src)
@@ -104,7 +118,7 @@ def dirlister_i():
             ##pre-condition csv
             csvfile = open(dst_csv,'w',newline='')
             csvwriter = csv.writer(csvfile)
-            header = ['path','size']
+            header = ['path','type','size']
             csvwriter.writerow(header)
             csvfile.close()
 
