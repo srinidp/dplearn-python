@@ -1,0 +1,97 @@
+^     - manas(caret)
+$     - srini(dollar)
+[]    - mike(character class)
+[^]   - mike(negated charcter class)
+[-]   - mike(dash)
+.     - sunil(dot)
+|     - hemanth(or-alternation)
+()    - guru(parantheses-group-constrain alternation-backreferencing)
+\b    - thava(word boundary-alphanumeric boundary)
+
+quantifiers:(always append)
+?     - binesh(question mark-optional item-01)
++     - ratna(plus-1m)
+*     - jk(star-0m)
+{}    - sanjay(interval quantifier-range)
+
+escapes:
+\d    -
+\1 \2 -
+
+options:
+I     - (ignorecase)
+
+
+match case1:
+#check for the behaviour of caret^ inside character class
+#[^match]         => ^ is a meta charcter
+#[m^], [ma^tch]   => ^ is not a meta charcter
+
+match case2:
+#check for the behaviour of dash- inside character class
+#[a-z]            => - is a meta charcter
+#[-az], [az-]     => - is not a meta charcter
+
+match case3:
+#is there a difference b/t [xy] and (x|y)?
+#grey, gray, greay, graey, graay, greey
+#gr[ea]y          => same as below expression
+#gr(a|e)y         => same as above expression
+#is it really?
+#testline1 - there are 6 zeros in a million i.e., 1,000,000
+#testline2 - 100,000 in a not a million
+#[million1,000,000]     => matched each character inside the charcter set
+#(million|1,000,000)    => matched whole words only
+
+match case4:
+#where are the word boundaries?
+#testline1 - did you catch the cat
+#testline2 - did youcat the cat?
+#testline3 - did you-catch the cat
+#cat              => all 6 matches from above testlines
+#\bcat            => 5 matches from above testlines; - is start of word!!!
+#cat\b            => 4 matches from above testlines; ? is end of word!!!
+#\bcat\b          => 3 matches from above testlines; ? is end of word!!!
+
+ex1:
+#find repeating words in a line
+#testline1: the theory
+#testline2: the the
+#testline3: find find
+\b([a-zA-Z0-9_]+) (\1)\b   => this works
+
+ex2:
+#find 'C' varibles in a line
+# this_is_a_Variable1
+# 1_this_is_not_a_variable
+\b[a-zA-Z][a-zA-Z0-9_]*    => this works
+
+ex3:
+#find string with double quotes
+# "double quotes"
+# "not with "triple quotes"
+"[^"]*"                    => ok
+
+ex4:
+#dollar with optional strings
+# $1.67
+# $.67
+# $100
+# Rs.200 0$1.67
+\$([0-9]+)?(\.[0-9]{2})?   => ok
+
+
+ex5:
+# time of the day as displayed in digital clock, 12hr format
+# 10:10 am
+#  5:59 pm
+# 99:99 pm
+# 00:00 am
+(1[012]|[0-9]):[0-5][0-9] (am|pm)     => this works
+
+# time of the day 24hr format
+# 23:59
+# 19:59
+# 10:59
+# 09:23
+(2[0123]|1[0-9]|0[0-9]):[0-5][0-9]    => this works
