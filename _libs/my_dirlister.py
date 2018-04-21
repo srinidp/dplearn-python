@@ -91,18 +91,25 @@ def dirlister_i():
         #print(line)
         src = line['input path']
         dst = line['output path']
+        ##check for empty input path
+        if src == '' or src.strip().upper() == 'CWD':
+            src = os.getcwd()
+        #print("src:",src)
         ##check for input path
         if(pathcheck(src,'d') == False):
             continue;
         ##check for empty output path
-        if dst == '':
+        if dst == '' or dst.strip().upper() == 'CWD':
             dst = os.getcwd()
+        ##check for output path
+        if(pathcheck(dst,'d') == False):
+            continue;
         ##check for empty output file
         if line['output file'] == '':
             line['output file'] = 'o_dirlister'
         dst_text = dst + '\\' + line['output file'] + '.txt'
         dst_csv = dst + '\\' + line['output file'] + '.csv'
-        #print(src)
+        #print("src:",src)
         #print(dst_text)
         #print(dst_csv)
 
